@@ -1,35 +1,44 @@
-import { useEffect, useState } from "react";
-import api from "../services/api";
 
+
+
+
+import { useEffect, useMemo, useState } from "react";
+import api from "../services/api";
+import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
+import ChildForm from "../components/ChildForm";
+import ChildCard from "../components/ChildCard";
+import ChildDetails from "../components/ChildDetails";
+import LatestHealthCard from "../components/LatestHealthCard";
+import HealthRecordForm from "../components/HealthRecordForm";
 import type { Child } from "../types/child.types";
 import type { HealthRecord } from "../types/healthRecord.types";
-import ChildForm from "../components/ChildForm";
-import HealthRecordForm from "../components/HealthRecordForm";
 
 function Dashboard() {
   const [children, setChildren] = useState<Child[]>([]);
   const [selectedChild, setSelectedChild] = useState<Child | null>(null);
   const [latestRecord, setLatestRecord] = useState<HealthRecord | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchChildren = async () => {
     try {
       setLoading(true);
-      const response = await api.get("/children");
-      setChildren(response.data);
-    } catch (error) {
-      console.error(error);
-    }finally{
-        setLoading(false);
+      const res = await api.get("/children");
+      setChildren(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchLatestRecord = async (childId: string) => {
     try {
-      const response = await api.get(`/health-records/latest/${childId}`);
-      setLatestRecord(response.data);
-    } catch (error) {
-      console.error(error);
+      const res = await api.get(`/health-records/latest/${childId}`);
+      setLatestRecord(res.data);
+    } catch (err) {
+      console.error(err);
       setLatestRecord(null);
     }
   };
@@ -38,131 +47,112 @@ function Dashboard() {
     fetchChildren();
   }, []);
 
+  const filteredChildren = useMemo(
+    () =>
+      children.filter((c) =>
+        c.fullName.toLowerCase().includes(search.toLowerCase())
+      ),
+    [children, search]
+  );
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Children Health Monitoring Dashboard</h1>
-        <ChildForm onChildAdded={fetchChildren} />
+    <div className="min-h-screen bg-slate-100">
+      <Header />
+      <div className="max-w-7xl mx-auto px-6 mt-6">
 
-        <hr />
-      <hr />
+  <div className="grid md:grid-cols-3 gap-5">
 
-      <h2>Children</h2>
-        {loading && <p>Loading children...</p>}
-        {!loading && children.length === 0 && (
-            <p>No children found.</p>
-        )}
+    <div className="bg-white rounded-xl shadow-lg p-5">
+      <h2 className="text-gray-500">
+        👶 Children
+      </h2>
 
-      {children.map((child) => (
-        <div
-          key={child._id}
-          style={{
-            border: "1px solid gray",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <h3>{child.fullName}</h3>
+      <p className="text-3xl font-bold mt-2">
+        {children.length}
+      </p>
+    </div>
 
-          <p>{child.gender}</p>
+    <div className="bg-white rounded-xl shadow-lg p-5">
+      <h2 className="text-gray-500">
+        📋 Dashboard
+      </h2>
 
-          <button style={{
-    padding:"8px 15px",
-    cursor:"pointer"
-}}
-            onClick={() => {
-              setSelectedChild(child);
-              fetchLatestRecord(child._id);
-            }}
-          >
-            View
-          </button>
-        </div>
-      ))}
+      <p className="text-lg mt-2">
+        Child Health Monitoring
+      </p>
+    </div>
 
-      {selectedChild && (
-        <>
-          <hr />
+    <div className="bg-white rounded-xl shadow-lg p-5">
+      <h2 className="text-gray-500">
+        ❤️ Status
+      </h2>
 
-          <h2>Child Details</h2>
+      <p className="text-lg mt-2 text-green-600 font-semibold">
+        System Ready
+      </p>
+    </div>
 
-          <p>
-            <strong>Name:</strong> {selectedChild.fullName}
-          </p>
+  </div>
 
-          <p>
-            <strong>Guardian:</strong> {selectedChild.guardianName}
-          </p>
+</div>
 
-          <p>
-            <strong>Phone:</strong> {selectedChild.contactNumber}
-          </p>
-        </>
-      )}
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-1 space-y-5">
+            <ChildForm onChildAdded={fetchChildren} />
 
-    {selectedChild && (
-  <HealthRecordForm
-    childId={selectedChild._id}
-    onRecordAdded={() =>
-      fetchLatestRecord(selectedChild._id)
-    }
-  />
-)}
+            <SearchBar search={search} setSearch={setSearch} />
 
-        {selectedChild && !latestRecord && (
-            <p>No health records found.</p>
+            {loading && <p>Loading children...</p>}
+
+            {!loading && filteredChildren.length === 0 && (
+              <div className="bg-white rounded-xl p-6 shadow text-center text-gray-500">
+                No children found.
+              </div>
             )}
 
-      {latestRecord && (
-        <>
-          <hr />
+            <div className="space-y-4">
+              {filteredChildren.map((child) => (
+                <ChildCard
+                  key={child._id}
+                  child={child}
+                  onView={() => {
+                    setSelectedChild(child);
+                    fetchLatestRecord(child._id);
+                  }}
+                />
+              ))}
+            </div>
+          </div>
 
-          <h2>Latest Health Record</h2>
+          <div className="lg:col-span-2 space-y-6">
+            {selectedChild ? (
+              <>
+                <ChildDetails child={selectedChild} />
 
-          <p>Height : {latestRecord.height} cm</p>
+                {latestRecord ? (
+                  <LatestHealthCard record={latestRecord} />
+                ) : (
+                  <div className="bg-white rounded-xl shadow p-6 text-gray-500">
+                    No health records found.
+                  </div>
+                )}
 
-          <p>Weight : {latestRecord.weight} kg</p>
-
-            <p
-            style={{
-                color:
-                latestRecord.temperature > 38
-                    ? "red"
-                    : "green",
-                fontWeight: "bold",
-            }}
-            >
-            Temperature : {latestRecord.temperature} °C
-            </p>
-
-                <p
-                style={{
-                    color:
-                    latestRecord.heartRate < 60 ||
-                    latestRecord.heartRate > 120
-                        ? "red"
-                        : "green",
-                    fontWeight: "bold",
-                }}
-                >
-                Heart Rate : {latestRecord.heartRate} bpm
-                </p>
-
-                <p
-                style={{
-                    color:
-                    latestRecord.spo2 < 95
-                        ? "red"
-                        : "green",
-                    fontWeight: "bold",
-                }}
-                >
-                SpO₂ : {latestRecord.spo2}%
-                </p>
-
-
-
-        </>
-      )}
+                <HealthRecordForm
+                  childId={selectedChild._id}
+                  onRecordAdded={() =>
+                    fetchLatestRecord(selectedChild._id)
+                  }
+                />
+              </>
+            ) : (
+              <div className="bg-white rounded-xl shadow p-10 text-center text-gray-500">
+                Select a child to view details.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

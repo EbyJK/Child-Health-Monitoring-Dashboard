@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
 import HealthRecord from "../models/healthRecord.model";
+import Child from "../models/child.model";
+
+
 
 export const addHealthRecord = async (
   req: Request,
@@ -14,6 +17,13 @@ export const addHealthRecord = async (
       spo2,
       measurementDate,
     } = req.body;
+
+    // Measurement date cannot be in the future
+if (new Date(measurementDate) > new Date()) {
+  return res.status(400).json({
+    message: "Measurement date cannot be in the future.",
+  });
+}
 
     if (height <= 0)
       return res.status(400).json({
@@ -39,7 +49,13 @@ export const addHealthRecord = async (
       return res.status(400).json({
         message: "Invalid body temperature",
       });
+      const child = await Child.findById(req.body.childId);
 
+if (!child) {
+  return res.status(404).json({
+    message: "Child not found.",
+  });
+}
     const record = await HealthRecord.create(req.body);
 
     res.status(201).json(record);

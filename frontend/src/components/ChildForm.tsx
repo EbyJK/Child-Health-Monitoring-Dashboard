@@ -1,6 +1,9 @@
+
+
+
 import { useState } from "react";
 import api from "../services/api";
-
+import toast from "react-hot-toast";
 interface Props {
   onChildAdded: () => void;
 }
@@ -29,90 +32,43 @@ function ChildForm({ onChildAdded }: Props) {
       setGender("Male");
       setGuardianName("");
       setContactNumber("");
-
+      toast.success("Child added successfully")
       onChildAdded();
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response?.data?.message||"Failed to add child");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Add Child</h2>
+    <div className="bg-white rounded-xl shadow-lg p-6">
+      <h2 className="text-2xl font-bold mb-5 text-slate-800">Add Child</h2>
 
-      <input style={{
-    padding:"8px",
-    marginBottom:"10px",
-    width:"250px"
-}}
-        type="text"
-        placeholder="Full Name"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input className="w-full border rounded-lg p-3" placeholder="Full Name"
+          value={fullName} onChange={(e)=>setFullName(e.target.value.replace(/[^A-Za-z]/g,""))} />
 
-      <br /><br />
+        <input className="w-full border rounded-lg p-3" type="date"
+          value={dateOfBirth} onChange={(e)=>setDateOfBirth(e.target.value)} />
 
-      <input  style={{
-    padding:"8px",
-    marginBottom:"10px",
-    width:"250px"
-}}
-        type="date"
-        value={dateOfBirth}
-        onChange={(e) => setDateOfBirth(e.target.value)}
-      />
+        <select className="w-full border rounded-lg p-3"
+          value={gender} onChange={(e)=>setGender(e.target.value)}>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
 
-      <br /><br />
+        <input className="w-full border rounded-lg p-3" placeholder="Guardian Name"
+          value={guardianName} onChange={(e)=>setGuardianName(e.target.value.replace(/[^A-Za-z]/g,""))} />
 
-      <select  style={{
-    padding:"8px",
-    marginBottom:"10px",
-    width:"250px"
-}}
-        value={gender}
-        onChange={(e) => setGender(e.target.value)}
-      >
-        <option>Male</option>
-        <option>Female</option>
-        <option>Other</option>
-      </select>
+        <input className="w-full border rounded-lg p-3" placeholder="Contact Number"
+          type="tel" maxLength={10} value={contactNumber} onChange={(e)=>{const value=e.target.value.replace(/\D/g,"");setContactNumber(value);}} />
 
-      <br /><br />
-
-      <input  style={{
-    padding:"8px",
-    marginBottom:"10px",
-    width:"250px"
-}}
-          type="text"
-        placeholder="Guardian Name"
-        value={guardianName}
-        onChange={(e) => setGuardianName(e.target.value)}
-      />
-
-      <br /><br />
-
-      <input  style={{
-    padding:"8px",
-    marginBottom:"10px",
-    width:"250px"
-}}
-        type="text"
-        placeholder="Contact Number"
-        value={contactNumber}
-        onChange={(e) => setContactNumber(e.target.value)}
-      />
-
-      <br /><br />
-
-      <button style={{
-    padding:"8px 15px",
-    cursor:"pointer"
-}} type="submit">
-        Add Child
-      </button>
-    </form>
+        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 font-semibold">
+          + Add Child
+        </button>
+      </form>
+    </div>
   );
 }
 
