@@ -199,14 +199,13 @@ One Child
 | GET | /api/health-records/:childId | Get All Records |
 | GET | /api/health-records/latest/:childId | Get Latest Record |
 
----
+
 
 
 ## Links
--
 https://child-health-monitoring-dashboard-gamma.vercel.app/
 https://child-health-monitoring-dashboard.onrender.com/
----
+
 
 # 🔑 Environment Variables
 
