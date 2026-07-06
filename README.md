@@ -201,29 +201,14 @@ One Child
 
 ---
 
-# 🚀 Installation
 
 ## Backend
 
-```bash
-cd backend
-
-npm install
-
-npm run dev
-```
-
+https://child-health-monitoring-dashboard.onrender.com/
 ---
 
 ## Frontend
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
+https://child-health-monitoring-dashboard-gamma.vercel.app/
 
 ---
 
