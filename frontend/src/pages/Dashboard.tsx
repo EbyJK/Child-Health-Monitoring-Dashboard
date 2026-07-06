@@ -1,7 +1,3 @@
-
-
-
-
 import { useEffect, useMemo, useState } from "react";
 import api from "../services/api";
 import Header from "../components/Header";
@@ -17,6 +13,7 @@ import type { HealthRecord } from "../types/healthRecord.types";
 function Dashboard() {
   const [children, setChildren] = useState<Child[]>([]);
   const [selectedChild, setSelectedChild] = useState<Child | null>(null);
+  const [editingChild, setEditingChild] = useState<Child | null>(null);
   const [latestRecord, setLatestRecord] = useState<HealthRecord | null>(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
@@ -99,7 +96,7 @@ function Dashboard() {
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-5">
-            <ChildForm onChildAdded={fetchChildren} />
+            <ChildForm onChildAdded={fetchChildren} editingChild={editingChild} clearEditing={() => setEditingChild(null)}/>
 
             <SearchBar search={search} setSearch={setSearch} />
 
@@ -120,6 +117,8 @@ function Dashboard() {
                     setSelectedChild(child);
                     fetchLatestRecord(child._id);
                   }}
+                  onEdit={() => setEditingChild(child)}
+                  onDelete={fetchChildren}
                 />
               ))}
             </div>
