@@ -67,7 +67,7 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
       setContactNumber("");
       toast.success("Child added successfully")
       onChildAdded();
-    } catch (err) {
+    } catch (err:any) {
       console.error(err);
       toast.error(err.response?.data?.message||"Failed to add child");
     }

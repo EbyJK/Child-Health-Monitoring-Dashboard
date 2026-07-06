@@ -35,7 +35,7 @@ function HealthRecordForm({ childId, onRecordAdded }: Props) {
       setSpo2("");
       toast.success("Health record saved");
       onRecordAdded();
-    }catch(err){
+    }catch(err:any){
       console.error(err);
       toast.error(err.response?.data?.message ||"Failed to save health record");
     }
