@@ -201,10 +201,15 @@ One Child
 
 
 ## Commands
+
+Backend Folder
  cd backend 
+ 
  nm run dev
 
- cd frontend 
+Frontend Folder
+cd frontend 
+
  npm run dev
 
 
