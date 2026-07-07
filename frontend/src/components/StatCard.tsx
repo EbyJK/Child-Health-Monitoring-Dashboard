@@ -32,7 +32,7 @@ function StatCard({
         {title}
       </h3>
 
-      <p className={`text-3xl font-bold mt-3 ${textColor}`}>
+      <p className={`text-xl lg:text-2xl font-bold mt-3 wrap-break-word ${textColor}`}>
         {value}
       </p>
 
