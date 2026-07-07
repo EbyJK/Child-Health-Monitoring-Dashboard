@@ -64,7 +64,7 @@ const visibleChildren = showAllChildren
   return (
     <div className="min-h-screen bg-slate-100">
       <Header />
-      <div className="max-w-7xl mx-auto px-6 mt-6">
+      <div className="max-w-[1700px] mx-auto px-6 mt-6">
 
   <div className="grid md:grid-cols-3 gap-5">
 
@@ -100,10 +100,10 @@ const visibleChildren = showAllChildren
 
 </div>
 
-      <div className="max-w-7xl mx-auto p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="col-span-1 space-y-5">
-            <div ref={formRef}>
+      <div className="max-w-[1700px] mx-auto p-6">
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
+          <div className="xl:col-span-3 space-y-5">
+            <div ref={formRef} >
                 <ChildForm onChildAdded={fetchChildren} editingChild={editingChild} clearEditing={() => setEditingChild(null)}/>
 
 
@@ -111,7 +111,14 @@ const visibleChildren = showAllChildren
             
             
 
-            {loading && <p>Loading children...</p>}
+            
+
+
+
+          </div>
+          <div className="xl:col-span-3">
+
+          {loading && <p>Loading children...</p>}
 
             {!loading && filteredChildren.length === 0 && (
               <div className="bg-white rounded-xl p-6 shadow text-center text-gray-500">
@@ -119,7 +126,7 @@ const visibleChildren = showAllChildren
               </div>
             )}
 
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-180 overflow-y-auto pr-2">
               {visibleChildren.map((child) => (
                 <ChildCard
                   key={child._id}
@@ -155,12 +162,8 @@ const visibleChildren = showAllChildren
     </button>
   </div>
 )}
-
-
-
-          </div>
-
-          <div ref={detailsRef} className="col-span-1 lg:col-span-2 space-y-6">
+</div>
+          <div ref={detailsRef} className="xl:col-span-6 space-y-6">
             {selectedChild ? (
               <>
                 <ChildDetails child={selectedChild} />
