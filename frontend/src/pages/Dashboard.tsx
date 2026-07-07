@@ -59,7 +59,7 @@ function Dashboard() {
 
 const visibleChildren = showAllChildren
   ? filteredChildren
-  : filteredChildren.slice(0, 4);
+  : filteredChildren.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-slate-100">
@@ -152,7 +152,7 @@ const visibleChildren = showAllChildren
               ))}
               </div>
 
-                {filteredChildren.length > 4 && (
+                {filteredChildren.length > 3 && (
   <div className="text-center mt-5">
     <button
       className="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg cursor-pointer"
