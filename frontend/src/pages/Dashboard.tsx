@@ -75,6 +75,18 @@ function Dashboard() {
       setSearch={setSearch}
     />
   </div>
+  <div className="bg-white rounded-xl shadow-lg p-5">
+    <h2 className="font-semibold text-blue-700">
+      Tip
+    </h2>
+
+    <p className="text-sm text-gray-600 mt-2">
+      Click any child card to view complete details,
+      latest health summary and health history.
+    </p>
+  </div>
+
+
     
   </div>
 

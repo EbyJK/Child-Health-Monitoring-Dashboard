@@ -55,7 +55,7 @@ if (new Date(measurementDate) > new Date()) {
 
     if (heartRate <= 0 || heartRate >220)
       return res.status(400).json({
-        message: "Invalid.Height range(1-220)",
+        message: "Invalid.HeartRate range(1-220)",
       });
 
     if (spo2 <= 0 || spo2 > 100)
