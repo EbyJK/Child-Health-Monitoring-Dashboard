@@ -57,7 +57,7 @@ function HealthHistory({ childId }: Props) {
     <input
       type="date"
       value={fromDate}
-       max={new Date().toISOString().split("T")[0]}
+       max={toDate || new Date().toISOString().split("T")[0]}
       onChange={(e) => setFromDate(e.target.value)}
       className="border rounded-lg p-2 w-full"
     />
@@ -71,6 +71,7 @@ function HealthHistory({ childId }: Props) {
     <input
       type="date"
       value={toDate}
+      min={fromDate|| undefined}
        max={new Date().toISOString().split("T")[0]}
       onChange={(e) => setToDate(e.target.value)}
       className="border rounded-lg p-2 w-full"
