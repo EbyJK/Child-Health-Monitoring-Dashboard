@@ -53,6 +53,13 @@ function Dashboard() {
     [children, search]
   );
 
+  const [showAllChildren, setShowAllChildren] =
+  useState(false);
+
+const visibleChildren = showAllChildren
+  ? filteredChildren
+  : filteredChildren.slice(0, 4);
+
   return (
     <div className="min-h-screen bg-slate-100">
       <Header />
@@ -93,8 +100,8 @@ function Dashboard() {
 </div>
 
       <div className="max-w-7xl mx-auto p-6">
-        <div className="grid lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-1 space-y-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="col-span-1 space-y-5">
             <div ref={formRef}>
                 <ChildForm onChildAdded={fetchChildren} editingChild={editingChild} clearEditing={() => setEditingChild(null)}/>
 
@@ -112,7 +119,7 @@ function Dashboard() {
             )}
 
             <div className="space-y-4">
-              {filteredChildren.map((child) => (
+              {visibleChildren.map((child) => (
                 <ChildCard
                   key={child._id}
                   child={child}
@@ -129,10 +136,24 @@ function Dashboard() {
                   onDelete={fetchChildren}
                 />
               ))}
-            </div>
+              </div>
+
+                {filteredChildren.length > 4 && (
+  <div className="text-center mt-5">
+    <button
+      className="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg"
+      onClick={() => setShowAllChildren(!showAllChildren)}
+    >
+      {showAllChildren ? "Show Less" : "Show More"}
+    </button>
+  </div>
+)}
+
+
+
           </div>
 
-          <div className="lg:col-span-2 space-y-6">
+          <div className="col-span-1 lg:col-span-2 space-y-6">
             {selectedChild ? (
               <>
                 <ChildDetails child={selectedChild} />
