@@ -65,7 +65,7 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
       setGender("Male");
       setGuardianName("");
       setContactNumber("");
-      toast.success("Child added successfully")
+      // toast.success("Child added successfully")
       onChildAdded();
     } catch (err:any) {
       console.error(err);
