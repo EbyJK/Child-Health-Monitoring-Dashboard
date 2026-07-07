@@ -22,12 +22,14 @@ const healthRecordSchema = new Schema<IHealthRecord>(
       type: Number,
       required: true,
       min: 1,
+      max:200,
     },
 
     weight: {
       type: Number,
       required: true,
       min: 1,
+      max:200,
     },
 
     temperature: {
@@ -41,6 +43,7 @@ const healthRecordSchema = new Schema<IHealthRecord>(
       type: Number,
       required: true,
       min: 1,
+      max:220,
     },
 
     spo2: {

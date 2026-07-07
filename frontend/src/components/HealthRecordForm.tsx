@@ -48,19 +48,19 @@ function HealthRecordForm({ childId, onRecordAdded }: Props) {
       </h2>
 
       <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
-        <input className="border rounded-lg p-3" placeholder="Height (cm)"
+        <input required className="border rounded-lg p-3" placeholder="Height (cm)"
           value={height} onChange={(e)=>setHeight(e.target.value)} />
 
-        <input className="border rounded-lg p-3" placeholder="Weight (kg)"
+        <input required className="border rounded-lg p-3" placeholder="Weight (kg)"
           value={weight} onChange={(e)=>setWeight(e.target.value)} />
 
-        <input className="border rounded-lg p-3" placeholder="Temperature (°C)"
+        <input required className="border rounded-lg p-3" placeholder="Temperature (°C)"
           value={temperature} onChange={(e)=>setTemperature(e.target.value)} />
 
-        <input className="border rounded-lg p-3" placeholder="Heart Rate (bpm)"
+        <input required className="border rounded-lg p-3" placeholder="Heart Rate (bpm)"
           value={heartRate} onChange={(e)=>setHeartRate(e.target.value)} />
 
-        <input className="border rounded-lg p-3" placeholder="SpO₂ (%)"
+        <input required className="border rounded-lg p-3" placeholder="SpO₂ (%)"
           value={spo2} onChange={(e)=>setSpo2(e.target.value)} />
 
         <div className="md:col-span-2">

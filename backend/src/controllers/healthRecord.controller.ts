@@ -18,6 +18,24 @@ export const addHealthRecord = async (
       measurementDate,
     } = req.body;
 
+    if (
+  height === "" ||
+  weight === "" ||
+  temperature === "" ||
+  heartRate === "" ||
+  spo2 === "" ||
+  height == null ||
+  weight == null ||
+  temperature == null ||
+  heartRate == null ||
+  spo2 == null ||
+  !measurementDate
+) {
+  return res.status(400).json({
+    message: "All health fields are required.",
+  });
+}
+
     // Measurement date cannot be in the future
 if (new Date(measurementDate) > new Date()) {
   return res.status(400).json({
@@ -25,29 +43,29 @@ if (new Date(measurementDate) > new Date()) {
   });
 }
 
-    if (height <= 0)
+    if (height <= 0 || height >200)
       return res.status(400).json({
-        message: "Height must be positive",
+        message: "Invalid. Height range(1-200)",
       });
 
-    if (weight <= 0)
+    if (weight <= 0 || weight>200)
       return res.status(400).json({
-        message: "Weight must be positive",
+        message: "Invalid. Weight range(1-200)",
       });
 
-    if (heartRate <= 0)
+    if (heartRate <= 0 || heartRate >220)
       return res.status(400).json({
-        message: "Heart rate must be positive",
+        message: "Invalid.Height range(1-220)",
       });
 
-    if (spo2 < 0 || spo2 > 100)
+    if (spo2 <= 0 || spo2 > 100)
       return res.status(400).json({
-        message: "SpO2 must be between 0 and 100",
+        message: "Invalid.SpO2 must be between 1 and 100",
       });
 
     if (temperature < 30 || temperature > 45)
       return res.status(400).json({
-        message: "Invalid body temperature",
+        message: "Invalid body temperature.Range(30-45)",
       });
       const child = await Child.findById(req.body.childId);
 
