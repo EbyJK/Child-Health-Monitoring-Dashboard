@@ -200,6 +200,19 @@ One Child
 | GET | /api/health-records/latest/:childId | Get Latest Record |
 
 
+## Commands
+
+Backend Folder
+
+ cd backend 
+ 
+ npm run dev
+
+Frontend Folder
+
+cd frontend 
+
+ npm run dev
 
 
 ## Links
