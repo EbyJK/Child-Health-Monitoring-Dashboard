@@ -79,7 +79,12 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
 
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold mb-5 text-slate-800">Add Child</h2>
+      <h2 className="text-2xl font-bold mb-5 text-slate-800">{editingChild?"Update Child":"Add Child"}</h2>
+      {editingChild && (
+  <p className="text-sm text-blue-600 mb-4">
+    Editing: <strong>{editingChild.fullName}</strong>
+  </p>
+)}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <label className="block text-sm font-semibold text-gray-700 mb-1">

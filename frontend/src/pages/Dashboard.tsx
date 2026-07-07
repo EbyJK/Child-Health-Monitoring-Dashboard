@@ -183,7 +183,7 @@ const visibleChildren = showAllChildren
               </>
             ) : (
               <div className="bg-white rounded-xl shadow p-10 text-center text-gray-500">
-                Click a card to view details.
+                Scroll to see the cards.
               </div>
             )}
           </div>
