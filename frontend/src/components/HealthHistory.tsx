@@ -9,7 +9,8 @@ interface Props {
 function HealthHistory({ childId }: Props) {
   const [records, setRecords] = useState<HealthRecord[]>([]);
   const [showHistory, setShowHistory] = useState(false);
-  const [filterDate, setFilterDate] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
 
   useEffect(() => {
     if (!showHistory) return;
@@ -26,37 +27,73 @@ function HealthHistory({ childId }: Props) {
     fetchRecords();
   }, [showHistory, childId]);
 
+    useEffect(() => {
+  setShowHistory(false);
+  setFromDate("");
+  setToDate("");
+}, [childId]);
+
+
+
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
       <button
         onClick={() => setShowHistory(!showHistory)}
         className="w-full bg-slate-700 text-white rounded-lg py-3 cursor-pointer"
       >
-        {showHistory ? "Hide History" : "View Health History"}
+        {showHistory ? "Hide Health History" : "View Health History"}
       </button>
 
       {showHistory && (
         <div className="mt-5 space-y-4">
-          <div className="mb-5">
-  <label className="block text-sm font-semibold mb-2">
-    Filter by Date
-  </label>
+          
+<div className="grid md:grid-cols-2 gap-4 mb-5">
 
-  <input
-    type="date"
-    value={filterDate}
-    onChange={(e) => setFilterDate(e.target.value)}
-    className="border rounded-lg p-2 w-full"
-  />
+  <div>
+    <label className="block text-sm font-semibold mb-2">
+      From Date
+    </label>
+
+    <input
+      type="date"
+      value={fromDate}
+      onChange={(e) => setFromDate(e.target.value)}
+      className="border rounded-lg p-2 w-full"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm font-semibold mb-2">
+      To Date
+    </label>
+
+    <input
+      type="date"
+      value={toDate}
+      onChange={(e) => setToDate(e.target.value)}
+      className="border rounded-lg p-2 w-full"
+    />
+  </div>
+
 </div>
-          {records .filter((record) => {
-    if (!filterDate) return true;
 
-    return (
-      new Date(record.measurementDate)
-        .toISOString()
-        .split("T")[0] === filterDate
-    );
+          {records .filter((record) => {
+     const recordDate = new Date(record.measurementDate);
+
+  if (fromDate && recordDate < new Date(fromDate)) {
+    return false;
+  }
+
+  if (toDate) {
+    const endDate = new Date(toDate);
+    endDate.setHours(23, 59, 59, 999);
+
+    if (recordDate > endDate) {
+      return false;
+    }
+  }
+
+  return true;
   }).map((record) => (
             <div
               key={record._id}
@@ -84,13 +121,23 @@ function HealthHistory({ childId }: Props) {
             </div>
           ))}
           {records.filter((record) => {
-  if (!filterDate) return true;
+            const recordDate = new Date(record.measurementDate);
 
-  return (
-    new Date(record.measurementDate)
-      .toISOString()
-      .split("T")[0] === filterDate
-  );
+  if (fromDate && recordDate < new Date(fromDate)) {
+    return false;
+  }
+
+  if (toDate) {
+    const endDate = new Date(toDate);
+    endDate.setHours(23,59,59,999);
+
+    if (recordDate > endDate) {
+      return false;
+    }
+  }
+
+  return true;
+ 
 }).length === 0 && (
   <div className="text-center text-gray-500 mt-4">
     No health records found for the selected date.
