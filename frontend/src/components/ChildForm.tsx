@@ -90,13 +90,13 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
         <label className="block text-sm font-semibold text-gray-700 mb-1">
   Full Name
 </label>
-        <input ref={nameInputRef} className="w-full border rounded-lg p-3" placeholder="Full Name"
+        <input required ref={nameInputRef} className="w-full border rounded-lg p-3" placeholder="Full Name"
           value={fullName} onChange={(e)=>setFullName(e.target.value.replace(/[^A-Za-z ]/g,""))} />
 
       <label className="block text-sm font-semibold text-gray-700 mb-1">
   Date of Birth
 </label>
-        <input className="w-full border rounded-lg p-3" type="date"
+        <input required className="w-full border rounded-lg p-3" type="date"
           value={dateOfBirth} onChange={(e)=>setDateOfBirth(e.target.value)} />
 
 
@@ -104,7 +104,7 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
   Gender
 </label>
 
-        <select className="w-full border rounded-lg p-3"
+        <select required className="w-full border rounded-lg p-3"
           value={gender} onChange={(e)=>setGender(e.target.value)}>
           <option>Male</option>
           <option>Female</option>
@@ -116,14 +116,14 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
 </label>
 
 
-        <input className="w-full border rounded-lg p-3" placeholder="Guardian Name"
+        <input required className="w-full border rounded-lg p-3" placeholder="Guardian Name"
           value={guardianName} onChange={(e)=>setGuardianName(e.target.value.replace(/[^A-Za-z ]/g,""))} />
 
           <label className="block text-sm font-semibold text-gray-700 mb-1">
 Contact number
 </label>
 
-        <input className="w-full border rounded-lg p-3" placeholder="Contact Number"
+        <input required className="w-full border rounded-lg p-3" placeholder="Contact Number"
           type="tel" maxLength={10} value={contactNumber} onChange={(e)=>{const value=e.target.value.replace(/\D/g,"");setContactNumber(value);}} />
 
         <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 font-semibold cursor-pointer">
