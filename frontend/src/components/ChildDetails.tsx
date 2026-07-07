@@ -28,7 +28,7 @@ function ChildDetails({ child }: Props) {
     <div className="bg-white rounded-2xl shadow-xl p-6">
 
       <h2 className="text-2xl font-bold text-blue-700 mb-6">
-        👦 Child Details
+         Child Details
       </h2>
 
       <div className="grid md:grid-cols-2 gap-5">

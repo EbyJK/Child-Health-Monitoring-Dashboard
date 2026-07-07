@@ -7,7 +7,7 @@ function Header() {
       <div className="max-w-7xl mx-auto px-6 py-8">
 
         <h1 className="text-4xl font-bold">
-          🏥 Children Health Monitoring Dashboard
+           Children Health Monitoring Dashboard
         </h1>
 
         <p className="mt-3 text-blue-100 text-lg">

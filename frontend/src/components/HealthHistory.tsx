@@ -9,6 +9,7 @@ interface Props {
 function HealthHistory({ childId }: Props) {
   const [records, setRecords] = useState<HealthRecord[]>([]);
   const [showHistory, setShowHistory] = useState(false);
+  const [filterDate, setFilterDate] = useState("");
 
   useEffect(() => {
     if (!showHistory) return;
@@ -36,7 +37,27 @@ function HealthHistory({ childId }: Props) {
 
       {showHistory && (
         <div className="mt-5 space-y-4">
-          {records.map((record) => (
+          <div className="mb-5">
+  <label className="block text-sm font-semibold mb-2">
+    Filter by Date
+  </label>
+
+  <input
+    type="date"
+    value={filterDate}
+    onChange={(e) => setFilterDate(e.target.value)}
+    className="border rounded-lg p-2 w-full"
+  />
+</div>
+          {records .filter((record) => {
+    if (!filterDate) return true;
+
+    return (
+      new Date(record.measurementDate)
+        .toISOString()
+        .split("T")[0] === filterDate
+    );
+  }).map((record) => (
             <div
               key={record._id}
               className="border rounded-lg p-4 bg-slate-50"
@@ -62,6 +83,19 @@ function HealthHistory({ childId }: Props) {
               <p>SpO₂: {record.spo2}%</p>
             </div>
           ))}
+          {records.filter((record) => {
+  if (!filterDate) return true;
+
+  return (
+    new Date(record.measurementDate)
+      .toISOString()
+      .split("T")[0] === filterDate
+  );
+}).length === 0 && (
+  <div className="text-center text-gray-500 mt-4">
+    No health records found for the selected date.
+  </div>
+)}
         </div>
       )}
     </div>

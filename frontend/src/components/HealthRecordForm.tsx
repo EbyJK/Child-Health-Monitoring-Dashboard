@@ -48,21 +48,74 @@ function HealthRecordForm({ childId, onRecordAdded }: Props) {
       </h2>
 
       <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-4">
-        <input required className="border rounded-lg p-3" placeholder="Height (cm)"
-          value={height} onChange={(e)=>setHeight(e.target.value)} />
+        <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1">
+    Height (cm)
+  </label>
 
-        <input required className="border rounded-lg p-3" placeholder="Weight (kg)"
-          value={weight} onChange={(e)=>setWeight(e.target.value)} />
+  <input
+    className="w-full border rounded-lg p-3"
+    placeholder="Enter height"
+    value={height}
+    onChange={(e) => setHeight(e.target.value)}
+    required
+  />
+</div>
+<div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1">
+    Weight (kg)
+  </label>
 
-        <input required className="border rounded-lg p-3" placeholder="Temperature (°C)"
-          value={temperature} onChange={(e)=>setTemperature(e.target.value)} />
+  <input
+    className="w-full border rounded-lg p-3"
+    placeholder="Enter weight"
+    value={weight}
+    onChange={(e) => setWeight(e.target.value)}
+    required
+  />
+</div>
+        
+        <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1">
+    Body Temperature (°C)
+  </label>
 
-        <input required className="border rounded-lg p-3" placeholder="Heart Rate (bpm)"
-          value={heartRate} onChange={(e)=>setHeartRate(e.target.value)} />
+  <input
+    className="w-full border rounded-lg p-3"
+    placeholder="Enter temperature"
+    value={temperature}
+    onChange={(e) => setTemperature(e.target.value)}
+    required
+  />
+</div>
 
-        <input required className="border rounded-lg p-3" placeholder="SpO₂ (%)"
-          value={spo2} onChange={(e)=>setSpo2(e.target.value)} />
+        <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1">
+    Heart Rate (bpm)
+  </label>
 
+  <input
+    className="w-full border rounded-lg p-3"
+    placeholder="Enter heart rate"
+    value={heartRate}
+    onChange={(e) => setHeartRate(e.target.value)}
+    required
+  />
+</div>
+
+        <div>
+  <label className="block text-sm font-semibold text-gray-700 mb-1">
+    SpO₂ (%)
+  </label>
+
+  <input
+    className="w-full border rounded-lg p-3"
+    placeholder="Enter SpO₂"
+    value={spo2}
+    onChange={(e) => setSpo2(e.target.value)}
+    required
+  />
+</div>
         <div className="md:col-span-2">
           <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg py-3 font-semibold">
             Save Health Record

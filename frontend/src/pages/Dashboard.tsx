@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState,useRef } from "react";
 import api from "../services/api";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -18,7 +18,7 @@ function Dashboard() {
   const [latestRecord, setLatestRecord] = useState<HealthRecord | null>(null);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const formRef = useRef<HTMLDivElement>(null);
   const fetchChildren = async () => {
     try {
       setLoading(true);
@@ -62,14 +62,19 @@ function Dashboard() {
 
     <div className="bg-white rounded-xl shadow-lg p-5">
       <h2 className="text-gray-500">
-        👶 Total Children
+         Total Children
       </h2>
 
       <p className="text-3xl font-bold mt-2">
         {children.length}
       </p>
     </div>
-
+  <div>
+    <SearchBar
+      search={search}
+      setSearch={setSearch}
+    />
+  </div>
     
   </div>
 
@@ -78,9 +83,13 @@ function Dashboard() {
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-5">
-            <ChildForm onChildAdded={fetchChildren} editingChild={editingChild} clearEditing={() => setEditingChild(null)}/>
+            <div ref={formRef}>
+                <ChildForm onChildAdded={fetchChildren} editingChild={editingChild} clearEditing={() => setEditingChild(null)}/>
 
-            <SearchBar search={search} setSearch={setSearch} />
+
+            </div>
+            
+            
 
             {loading && <p>Loading children...</p>}
 
@@ -99,7 +108,12 @@ function Dashboard() {
                     setSelectedChild(child);
                     fetchLatestRecord(child._id);
                   }}
-                  onEdit={() => setEditingChild(child)}
+                  onEdit={() => {setEditingChild(child);
+                    formRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
                   onDelete={fetchChildren}
                 />
               ))}
@@ -129,7 +143,7 @@ function Dashboard() {
               </>
             ) : (
               <div className="bg-white rounded-xl shadow p-10 text-center text-gray-500">
-                Select a child to view details.
+                Click a card to view details.
               </div>
             )}
           </div>
