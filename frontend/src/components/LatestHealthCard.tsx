@@ -19,16 +19,16 @@ let bmiText = "";
 
 if (bmiValue < 18.5) {
   bmiStatus = "low";
-  bmiText = `${bmi}(Underweight)`;
+  bmiText = `${bmi}  Underweight`;
 } else if (bmiValue < 25) {
   bmiStatus = "normal";
-  bmiText = `${bmi} (Normal)`;
+  bmiText = `${bmi} Normal`;
 } else if (bmiValue < 30) {
   bmiStatus = "high";
-  bmiText = `${bmi} (Overweight)`;
+  bmiText = `${bmi} Overweight`;
 } else {
   bmiStatus = "high";
-  bmiText = `${bmi} (Obese)`;
+  bmiText = `${bmi} Obese`;
 }
 
 
