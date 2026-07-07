@@ -70,7 +70,7 @@ function Dashboard() {
       </p>
     </div>
 
-    <div className="bg-white rounded-xl shadow-lg p-5">
+    {/* <div className="bg-white rounded-xl shadow-lg p-5">
       <h2 className="text-gray-500">
         📋 Dashboard
       </h2>
@@ -88,7 +88,7 @@ function Dashboard() {
       <p className="text-lg mt-2 text-green-600 font-semibold">
         System Ready
       </p>
-    </div>
+    </div> */}
 
   </div>
 
