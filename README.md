@@ -199,33 +199,15 @@ One Child
 | GET | /api/health-records/:childId | Get All Records |
 | GET | /api/health-records/latest/:childId | Get Latest Record |
 
----
 
-# 🚀 Installation
 
-## Backend
 
-```bash
-cd backend
+## Links
+https://child-health-monitoring-dashboard-gamma.vercel.app/
 
-npm install
 
-npm run dev
-```
+https://child-health-monitoring-dashboard.onrender.com/
 
----
-
-## Frontend
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
----
 
 # 🔑 Environment Variables
 
