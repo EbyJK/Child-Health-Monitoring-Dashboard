@@ -121,7 +121,7 @@ Contact number
         <input className="w-full border rounded-lg p-3" placeholder="Contact Number"
           type="tel" maxLength={10} value={contactNumber} onChange={(e)=>{const value=e.target.value.replace(/\D/g,"");setContactNumber(value);}} />
 
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 font-semibold">
+        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg py-3 font-semibold cursor-pointer">
           {editingChild ? "Update Child" : "+ Add Child"}
         </button>
       </form>

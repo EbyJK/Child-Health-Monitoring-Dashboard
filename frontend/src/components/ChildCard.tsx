@@ -69,14 +69,14 @@ function ChildCard({
 
         <button
           onClick={(e)=>{e.stopPropagation();onEdit();}}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg"
+          className="bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-lg cursor-pointer"
         >
           Edit
         </button>
 
         <button
           onClick={(e)=>{e.stopPropagation();handleDelete();}}
-          className="bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg"
+          className="bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg cursor-pointer"
         >
           Delete
         </button>

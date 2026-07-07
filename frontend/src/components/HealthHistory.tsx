@@ -30,7 +30,7 @@ function HealthHistory({ childId }: Props) {
     <div className="bg-white rounded-xl shadow-lg p-6">
       <button
         onClick={() => setShowHistory(!showHistory)}
-        className="w-full bg-slate-700 text-white rounded-lg py-3"
+        className="w-full bg-slate-700 text-white rounded-lg py-3 cursor-pointer"
       >
         {showHistory ? "Hide History" : "View Health History"}
       </button>

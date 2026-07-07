@@ -19,6 +19,7 @@ function Dashboard() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
   const fetchChildren = async () => {
     try {
       setLoading(true);
@@ -126,6 +127,12 @@ const visibleChildren = showAllChildren
                   onView={() => {
                     setSelectedChild(child);
                     fetchLatestRecord(child._id);
+                    setTimeout(() => {
+                      detailsRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                       });
+                    }, 150);
                   }}
                   onEdit={() => {setEditingChild(child);
                     formRef.current?.scrollIntoView({
@@ -141,7 +148,7 @@ const visibleChildren = showAllChildren
                 {filteredChildren.length > 4 && (
   <div className="text-center mt-5">
     <button
-      className="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg"
+      className="bg-slate-700 hover:bg-slate-800 text-white px-5 py-2 rounded-lg cursor-pointer"
       onClick={() => setShowAllChildren(!showAllChildren)}
     >
       {showAllChildren ? "Show Less" : "Show More"}
@@ -153,7 +160,7 @@ const visibleChildren = showAllChildren
 
           </div>
 
-          <div className="col-span-1 lg:col-span-2 space-y-6">
+          <div ref={detailsRef} className="col-span-1 lg:col-span-2 space-y-6">
             {selectedChild ? (
               <>
                 <ChildDetails child={selectedChild} />

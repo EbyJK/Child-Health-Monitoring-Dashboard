@@ -117,7 +117,7 @@ function HealthRecordForm({ childId, onRecordAdded }: Props) {
   />
 </div>
         <div className="md:col-span-2">
-          <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg py-3 font-semibold">
+          <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg py-3 font-semibold cursor-pointer">
             Save Health Record
           </button>
         </div>
