@@ -88,6 +88,28 @@ if (bmiValue < 18.5) {
           status={bmiStatus}
         />
 
+        <div className="mt-6 border-t pt-4">
+  <p className="text-gray-500 font-semibold">
+    Measurement Date
+  </p>
+
+  <p className="text-lg">
+    {new Date(
+      record.measurementDate
+    ).toLocaleDateString()}
+  </p>
+
+  <p className="text-gray-500 font-semibold mt-3">
+    Measurement Time
+  </p>
+
+  <p className="text-lg">
+    {new Date(
+      record.measurementDate
+    ).toLocaleTimeString()}
+  </p>
+</div>
+
       </div>
     </div>
   );

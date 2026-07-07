@@ -10,6 +10,7 @@
     "esModuleInterop": true,
 
     "moduleResolution": "node",
+    "ignoreDeprecations": "6.0",
 
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true

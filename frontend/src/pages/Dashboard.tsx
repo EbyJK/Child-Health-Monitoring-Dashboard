@@ -9,6 +9,7 @@ import LatestHealthCard from "../components/LatestHealthCard";
 import HealthRecordForm from "../components/HealthRecordForm";
 import type { Child } from "../types/child.types";
 import type { HealthRecord } from "../types/healthRecord.types";
+import HealthHistory from "../components/HealthHistory";
 
 function Dashboard() {
   const [children, setChildren] = useState<Child[]>([]);
@@ -143,6 +144,7 @@ function Dashboard() {
                     fetchLatestRecord(selectedChild._id)
                   }
                 />
+                <HealthHistory childId={selectedChild._id} />
               </>
             ) : (
               <div className="bg-white rounded-xl shadow p-10 text-center text-gray-500">
