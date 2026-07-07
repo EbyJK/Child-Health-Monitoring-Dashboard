@@ -62,7 +62,7 @@ function Dashboard() {
 
     <div className="bg-white rounded-xl shadow-lg p-5">
       <h2 className="text-gray-500">
-        👶 Children
+        👶 Total Children
       </h2>
 
       <p className="text-3xl font-bold mt-2">
@@ -70,26 +70,7 @@ function Dashboard() {
       </p>
     </div>
 
-    {/* <div className="bg-white rounded-xl shadow-lg p-5">
-      <h2 className="text-gray-500">
-        📋 Dashboard
-      </h2>
-
-      <p className="text-lg mt-2">
-        Child Health Monitoring
-      </p>
-    </div>
-
-    <div className="bg-white rounded-xl shadow-lg p-5">
-      <h2 className="text-gray-500">
-        ❤️ Status
-      </h2>
-
-      <p className="text-lg mt-2 text-green-600 font-semibold">
-        System Ready
-      </p>
-    </div> */}
-
+    
   </div>
 
 </div>
