@@ -39,7 +39,7 @@ export const addHealthRecord = async (
     // Measurement date cannot be in the future
 if (new Date(measurementDate) > new Date()) {
   return res.status(400).json({
-    message: "Measurement date cannot be in the future.",
+    
   });
 }
 
