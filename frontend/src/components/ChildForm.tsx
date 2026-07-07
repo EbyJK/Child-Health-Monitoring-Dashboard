@@ -65,7 +65,6 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
       setGender("Male");
       setGuardianName("");
       setContactNumber("");
-      // toast.success("Child added successfully")
       onChildAdded();
     } catch (err:any) {
       console.error(err);
@@ -79,7 +78,7 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <input className="w-full border rounded-lg p-3" placeholder="Full Name"
-          value={fullName} onChange={(e)=>setFullName(e.target.value.replace(/[^A-Za-z]/g,""))} />
+          value={fullName} onChange={(e)=>setFullName(e.target.value.replace(/[^A-Za-z ]/g,""))} />
 
         <input className="w-full border rounded-lg p-3" type="date"
           value={dateOfBirth} onChange={(e)=>setDateOfBirth(e.target.value)} />
@@ -92,7 +91,7 @@ function ChildForm({ onChildAdded,editingChild,clearEditing }: Props) {
         </select>
 
         <input className="w-full border rounded-lg p-3" placeholder="Guardian Name"
-          value={guardianName} onChange={(e)=>setGuardianName(e.target.value.replace(/[^A-Za-z]/g,""))} />
+          value={guardianName} onChange={(e)=>setGuardianName(e.target.value.replace(/[^A-Za-z ]/g,""))} />
 
         <input className="w-full border rounded-lg p-3" placeholder="Contact Number"
           type="tel" maxLength={10} value={contactNumber} onChange={(e)=>{const value=e.target.value.replace(/\D/g,"");setContactNumber(value);}} />
