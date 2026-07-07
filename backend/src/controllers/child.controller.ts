@@ -90,6 +90,41 @@ export const getChildById = async (req: Request, res: Response) => {
 
 export const updateChild = async (req: Request, res: Response) => {
   try {
+    const {
+      fullName,
+      dateOfBirth,
+      contactNumber,
+    } = req.body;
+
+    // Full Name validation
+    if (!fullName || fullName.trim() === "") {
+      return res.status(400).json({
+        message: "Full name is required.",
+      });
+    }
+
+    if (!/^[A-Za-z ]+$/.test(fullName)) {
+      return res.status(400).json({
+        message:
+          "Full name should contain only letters and spaces.",
+      });
+    }
+
+    // Future DOB validation
+    if (new Date(dateOfBirth) > new Date()) {
+      return res.status(400).json({
+        message:
+          "Date of birth cannot be in the future.",
+      });
+    }
+
+    // Contact Number validation
+    if (!/^\d{10}$/.test(contactNumber)) {
+      return res.status(400).json({
+        message:
+          "Contact number must contain exactly 10 digits.",
+      });
+    }
     const child = await Child.findByIdAndUpdate(
       req.params.id,
       req.body,
